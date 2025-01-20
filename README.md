@@ -19,3 +19,4 @@ This project was based on these resources:
 * [Streamlit Cheat Sheet](https://cheat-sheet.streamlit.app/)
 * [PydanticAI](https://ai.pydantic.dev/agents/)
 * [OpenAI Pricing](https://openai.com/api/pricing/)
+* [Crawl4AI](https://docs.crawl4ai.com/core/page-interaction/)
