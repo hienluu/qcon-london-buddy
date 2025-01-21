@@ -249,10 +249,10 @@ async def main():
         # Add suggested questions based on content
         with st.expander("📝 Suggested Questions", expanded=False):
             st.markdown(
-                """
+            """
             Try asking:
             - "When is QCon London 2025 and where is it?"
-            - "Tell me about all the 2025 tracks"
+            - "What are the different 2025 tracks at QCon London?"
             - "What are the presentations in track AI and ML for Software Engineers?"
             - "Do you offer alumni discounts for returning QCon attendees?"
             """
@@ -279,7 +279,7 @@ async def main():
                 await run_agent_with_streaming(user_input)
 
         # Clear chat button
-        if st.button("Clear Chat History"):
+        if st.button("New Chat"):
             st.session_state.messages = []
             st.rerun()
     else:

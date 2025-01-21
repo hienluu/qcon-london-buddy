@@ -18,7 +18,7 @@ from vector_db import init_collection
 
 load_dotenv()
 
-EMBEDDING_MODEL = os.getenv('EMBEDDING_MODEL')
+EMBEDDING_MODEL_NAME = os.getenv('EMBEDDING_MODEL_NAME')
 
 # Initialize OpenAI client
 openai_client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -81,7 +81,7 @@ async def get_title_and_summary(chunk: str, url: str) -> Dict[str, str]:
 
     try:
         response = await openai_client.chat.completions.create(
-            model=os.getenv("LLM_MODEL"),
+            model=os.getenv("LLM_MODEL_NAME"),
             messages=[
                 {"role": "system", "content": system_prompt},
                 {
@@ -104,7 +104,7 @@ async def get_embedding(text: str) -> List[float]:
     """Get embedding vector from OpenAI."""
     try:
         response = await openai_client.embeddings.create(
-            model=EMBEDDING_MODEL, input=text
+            model=EMBEDDING_MODEL_NAME, input=text
         )
         return response.data[0].embedding
     except Exception as e:

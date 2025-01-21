@@ -8,6 +8,7 @@ import asyncio
 import httpx
 import os
 
+from utils import read_system_prompt
 from pydantic_ai import Agent, ModelRetry, RunContext
 from pydantic_ai.models.openai import OpenAIModel
 from typing import List
@@ -15,20 +16,21 @@ from chromadb.api.models.Collection import Collection
 
 load_dotenv()
 
-EMBEDDING_MODEL = os.getenv('EMBEDDING_MODEL')
-llm = os.getenv("LLM_MODEL")
-model = OpenAIModel(llm)
+EMBEDDING_MODEL_NAME = os.getenv('EMBEDDING_MODEL_NAME')
+model = OpenAIModel(os.getenv("LLM_MODEL_NAME"))
 
 logfire.configure(send_to_logfire="if-token-present")
 
+SYSTEM_PROMPT = read_system_prompt(os.getenv("SYSTEM_PROMPT_FILE"))
 
 @dataclass
 class PydanticAIDeps:
     collection: Collection
     openai_client: AsyncOpenAI
 
+system_prompt = SYSTEM_PROMPT
 
-system_prompt = """
+""" system_prompt = 
 You are a knowlegeable and courteous concierge for QCon London 2025 conference.
 You have access to all information and details about the tracks, presentations, speaker bio, venue information, 
 Your job is to help conference attendees to discover presentations or speakers that match their interest so they would have the best
@@ -45,7 +47,7 @@ When analyzing the content, make sure to:
 3. Be clear when you're making assumptions or inferring information
 
 Always let the user know when you didn't find the answer in the documentation or the right URL - be honest.
-"""
+""" 
 
 pydantic_ai_agent = Agent(
     model, system_prompt=system_prompt, deps_type=PydanticAIDeps, retries=2
@@ -56,7 +58,7 @@ async def get_embedding(text: str, openai_client: AsyncOpenAI) -> List[float]:
     """Get embedding vector from OpenAI."""
     try:
         response = await openai_client.embeddings.create(
-            model=EMBEDDING_MODEL, input=text
+            model=EMBEDDING_MODEL_NAME, input=text
         )
         return response.data[0].embedding
     except Exception as e:
