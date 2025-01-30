@@ -20,3 +20,4 @@ This project was based on these resources:
 * [PydanticAI](https://ai.pydantic.dev/agents/)
 * [OpenAI Pricing](https://openai.com/api/pricing/)
 * [Crawl4AI](https://docs.crawl4ai.com/core/page-interaction/)
+  * [Crawl4AI example in collab](https://colab.research.google.com/drive/1SgRPrByQLzjRfwoRNq1wSGE9nYY_EE8C?usp=sharing#scrollTo=003376f3)   
